@@ -96,70 +96,41 @@ homebrew-webp-converter
 
 The naming is important: it must start with `homebrew-`.
 
-### 2.2 Create the formula file
+### 2.2 Use the formula file from this repository
 
-In your new `homebrew-webp-converter` repository, create a file called `webp-convert.rb`:
+I've already created a complete formula file for you: [webp-convert.rb](webp-convert.rb)
+
+Copy this file to your `homebrew-webp-converter` repository. This formula includes:
+- All necessary dependencies for Pillow (jpeg-turbo, libpng, libtiff, little-cms2, webp, freetype, zlib)
+- Proper environment variables to help Pillow find the image libraries
+- All Python dependencies with correct SHA256 hashes
+
+The key additions that fix the Pillow compilation issue are:
 
 ```ruby
-class WebpConvert < Formula
-  include Language::Python::Virtualenv
+depends_on "jpeg-turbo"
+depends_on "libpng"
+depends_on "libtiff"
+depends_on "little-cms2"
+depends_on "webp"
+depends_on "freetype"
+depends_on "zlib"
 
-  desc "Powerful command-line tool for converting images to WebP format"
-  homepage "https://github.com/andriawan24/webp-converter"
-  url "https://files.pythonhosted.org/packages/source/w/webp-converter-cli/webp-converter-cli-0.0.1.tar.gz"
-  sha256 "YOUR_SHA256_HASH_HERE"
-  license "MIT"
+def install
+  # Set environment variables for Pillow to find image libraries
+  ENV.append "CFLAGS", "-I#{Formula["jpeg-turbo"].opt_include}"
+  ENV.append "CFLAGS", "-I#{Formula["libpng"].opt_include}"
+  # ... etc
 
-  depends_on "python@3.11"
-
-  resource "click" do
-    url "https://files.pythonhosted.org/packages/source/c/click/click-8.2.1.tar.gz"
-    sha256 "7682dc8afb30297001674575ea00d1814d808d6a36af415a82bd481d37ba7b8e"
-  end
-
-  resource "pillow" do
-    url "https://files.pythonhosted.org/packages/source/p/pillow/pillow-11.2.1.tar.gz"
-    sha256 "SHA256_FOR_PILLOW"
-  end
-
-  resource "rich" do
-    url "https://files.pythonhosted.org/packages/source/r/rich/rich-14.0.0.tar.gz"
-    sha256 "SHA256_FOR_RICH"
-  end
-
-  resource "typer" do
-    url "https://files.pythonhosted.org/packages/source/t/typer/typer-0.16.0.tar.gz"
-    sha256 "SHA256_FOR_TYPER"
-  end
-
-  def install
-    virtualenv_install_with_resources
-  end
-
-  test do
-    system "#{bin}/webp-convert", "--version"
-  end
+  virtualenv_install_with_resources
 end
 ```
 
-### 2.3 Get SHA256 hashes
+### 2.3 The formula is already complete!
 
-You need to calculate SHA256 hashes for your package and all dependencies:
+The [webp-convert.rb](webp-convert.rb) file already has all the correct SHA256 hashes and dependencies. Just copy it to your tap repository!
 
-```bash
-# For your package
-curl -sL https://files.pythonhosted.org/packages/source/w/webp-converter-cli/webp-converter-cli-0.0.1.tar.gz | shasum -a 256
-
-# For each dependency (adjust version numbers as needed)
-curl -sL https://files.pythonhosted.org/packages/source/c/click/click-8.2.1.tar.gz | shasum -a 256
-curl -sL https://files.pythonhosted.org/packages/source/p/pillow/pillow-11.2.1.tar.gz | shasum -a 256
-curl -sL https://files.pythonhosted.org/packages/source/r/rich/rich-14.0.0.tar.gz | shasum -a 256
-curl -sL https://files.pythonhosted.org/packages/source/t/typer/typer-0.16.0.tar.gz | shasum -a 256
-```
-
-Replace the `YOUR_SHA256_HASH_HERE` and other SHA256 placeholders with the actual values.
-
-### 2.4 Alternatively: Use homebrew-pypi-poet (easier)
+### 2.4 Optional: Generate formula automatically (for future updates)
 
 There's a tool that can generate the formula for you:
 
