@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "webp-converter-cli"
+version = "1.0.0"
+description = "A powerful command-line tool for converting images to WebP format"
+readme = "README.md"
+authors = [
+    { name = "Naufal Fawwaz Andriawan", email = "fawwaz@andriawan.dev" }
+]
+license = { text = "MIT" }
+requires-python = ">=3.6"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Graphics :: Graphics Conversion",
+]
+keywords = ["webp", "image-conversion", "cli", "converter"]
+dependencies = [
+    "click>=8.0.0",
+    "pillow>=11.0.0",
+    "rich>=14.0.0",
+    "typer>=0.16.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/andriawan24/webp-converter"
+Repository = "https://github.com/andriawan24/webp-converter"
+Issues = "https://github.com/andriawan24/webp-converter/issues"
+
+[project.scripts]
+webp-convert = "src.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]

@@ -13,6 +13,35 @@ A powerful command-line tool for converting images to WebP format with ease! Con
 
 ## Installation
 
+### Option 1: Install via pip (Recommended)
+
+```bash
+pip install webp-converter-cli
+```
+
+### Option 2: Install via pipx (Isolated Environment)
+
+```bash
+# Install pipx if you don't have it
+brew install pipx
+pipx ensurepath
+
+# Install webp-converter-cli
+pipx install webp-converter-cli
+```
+
+### Option 3: Install via Homebrew (Coming Soon)
+
+```bash
+# Add the tap
+brew tap andriawan24/webp-converter
+
+# Install the tool
+brew install webp-convert
+```
+
+### Option 4: Install from Source
+
 1. Clone the repository:
 ```bash
 git clone https://github.com/andriawan24/webp-converter.git
@@ -37,6 +66,10 @@ pip install -r requirements.txt
 Convert a single image file to WebP format:
 
 ```bash
+# If installed via pip/pipx/homebrew
+webp-convert convert -s input.jpg -o ./output -q 85
+
+# If running from source
 python main.py convert -s input.jpg -o ./output -q 85
 ```
 
@@ -51,13 +84,15 @@ Convert multiple images at once:
 
 ```bash
 # Convert specific files
-python main.py convert-batch -s photo1.jpg -s photo2.png -o ./output
+webp-convert convert-batch -s photo1.jpg -s photo2.png -o ./output
 
 # Convert all images in a directory (recursive)
-python main.py convert-batch -s ./photos -o ./webp_output -q 90
+webp-convert convert-batch -s ./photos -o ./webp_output -q 90
 
 # Use glob patterns
-python main.py convert-batch -s "*.jpg" -s "**/*.png" -o ./converted
+webp-convert convert-batch -s "*.jpg" -s "**/*.png" -o ./converted
+
+# If running from source, use: python main.py convert-batch ...
 ```
 
 **Parameters:**
@@ -69,7 +104,9 @@ python main.py convert-batch -s "*.jpg" -s "**/*.png" -o ./converted
 ### Get Version Information
 
 ```bash
-python main.py --version
+webp-convert --version
+
+# If running from source: python main.py --version
 ```
 
 ## Supported Formats
