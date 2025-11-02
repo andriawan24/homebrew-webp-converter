@@ -7,7 +7,7 @@ class WebpConvert < Formula
     sha256 "1d1231673daecc32cc360c94b0a1a1f7283fc62a53deca50d2a969b48130a181"
     license "MIT"
   
-    depends_on "python@3.1"
+    depends_on "python@3.14"
   
     resource "click" do
       url "https://files.pythonhosted.org/packages/source/c/click/click-8.2.1.tar.gz"
