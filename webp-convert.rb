@@ -53,7 +53,7 @@ class WebpConvert < Formula
 
   resource "typing-extensions" do
     url "https://files.pythonhosted.org/packages/source/t/typing-extensions/typing_extensions-4.14.0.tar.gz"
-    sha256 "6253e83a5bd4108fa2e63defaacca4a0b81a5d6eabd40a74f31bfff3edd17e56"
+    sha256 "8676b788e32f02ab42d9e7c61324048ae4c6d844a399eebace3d4979d75ceef4"
   end
 
   def install
